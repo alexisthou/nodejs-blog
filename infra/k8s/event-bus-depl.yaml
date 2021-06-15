@@ -1,35 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: posts-depl
+  name: event-bus-depl
 spec: 
   replicas: 1
   selector:
-    ## tells the deployement to look for a pod with the labels app: posts
+    ## tells the deployement to look for a pod with the labels app: event-bus
     matchLabels:
-      app: posts
+      app: event-bus
   template:
     # Tells the deployment to create a pod with this label
     metadata:
       labels:
-        app: posts
+        app: event-bus
     # specification of the pod
     spec: 
       containers:
-        - name: posts
-          image: alexisth/blog-posts:latest
+        - name: event-bus
+          image: alexisth/blog-event-bus:latest
           imagePullPolicy: IfNotPresent
----
+---    
 apiVersion: v1
 kind: Service
 metadata: 
-  name: posts-clusterip-srv
+  name: event-bus-srv
 spec:
   type: ClusterIP # ClusterIP is the default value, if no value then it will be ClusterIP
   selector: 
-    app: posts
+    app: event-bus
   ports:
-    - name: posts # can be anything
+    - name: event-bus # can be anything
       protocol: TCP
-      port: 4000 # exposed port at the cluster level. The outside 
-      targetPort: 4000 # port that it's listening to
+      port: 4005 # exposed port at the cluster level. The outside 
+      targetPort: 4005 # port that it's listening to

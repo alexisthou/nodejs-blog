@@ -14,24 +14,24 @@ app.post('/events', (req, res) => {
     events.push(event);
 
     // Send to post Service, only a notification
-    axios.post('http://localhost:4000/events', event).catch((err) => {
+    axios.post('http://posts-clusterip-srv:4000/events', event).catch((err) => {
         console.log(err.message);
     });
 
     // Send to comment Service, only a notification
-    axios.post('http://localhost:4001/events', event).catch((err) => {
-        console.log(err.message);
-    });
+    // axios.post('http://localhost:4001/events', event).catch((err) => {
+    //     console.log(err.message);
+    // });
 
-    // Send to query Service, triger stuff
-    axios.post('http://localhost:4002/events', event).catch((err) => {
-        console.log(err.message);
-    });
+    // // Send to query Service, trigger stuff
+    // axios.post('http://localhost:4002/events', event).catch((err) => {
+    //     console.log(err.message);
+    // });
 
-    // Send to query Moderation, trigger comment moderation
-    axios.post('http://localhost:4003/events', event).catch((err) => {
-        console.log(err.message);
-    });
+    // // Send to query Moderation, trigger comment moderation
+    // axios.post('http://localhost:4003/events', event).catch((err) => {
+    //     console.log(err.message);
+    // });
 
 
     res.send({status: 'OK'});
