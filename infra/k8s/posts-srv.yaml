@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: posts-srv
+spec:
+  type: NodePort
+  selector: 
+     # Find all posts with the label port and then expose them to the outside world
+    app: posts
+  ports:
+    - name: posts # can be anything
+      protocol: TCP
+      port: 4000 # exposed port at the cluster level. The outside 
+      targetPort: 4000 # port that it's listening to

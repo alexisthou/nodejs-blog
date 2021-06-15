@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: posts-depl
+spec: 
+  replicas: 1
+  selector:
+    ## tells the deployement to look for a pod with the labels app: posts
+    matchLabels:
+      app: posts
+  template:
+    # Tells the deployment to create a pod with this label
+    metadata:
+      labels:
+        app: posts
+    # specification of the pod
+    spec: 
+      containers:
+        - name: posts
+          image: alexisth/blog-posts:latest
+          imagePullPolicy: IfNotPresent
